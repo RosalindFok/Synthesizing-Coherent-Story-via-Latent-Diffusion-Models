@@ -33,7 +33,7 @@ for key, value in dirs_level.items():
     valid_dirs += value[element_count[key][0] : element_count[key][0]+element_count[key][1]]
     test_dirs += value[element_count[key][0]+element_count[key][1] : ]
 
-def extract_number(s):
+def extract_number(s)->int:
     return int(re.search(r'_([0-9]+).png', s).group(1))
 
 def merge_dicts(dicts : list[dict])->dict:
@@ -76,12 +76,13 @@ except ValueError as e:
     print(e)
 
 hdf5_dir = os.path.join('..', 'oxford_data')
+hdf5_path = os.path.join(hdf5_dir, 'oxford_hdf5')
 if not os.path.exists(hdf5_dir):
     os.makedirs(hdf5_dir)
 
 def main():
     start_time = time.time()
-    with h5py.File(os.path.join(hdf5_dir, 'oxford_hdf5'), 'w') as f:
+    with h5py.File(hdf5_path, 'w') as f:
         for subset, pics, caps in zip(['train', 'valid', 'test'], [train_pics, valid_pics, test_pics], [train_captions, valid_captions, test_captions]):
             length = len(pics)
             group = f.create_group(subset)
@@ -101,5 +102,18 @@ def main():
     end_time = time.time()
     print(f'It took {round((end_time-start_time)/60)} minutes to generate hdf5 file.')
 
+def check_hdf5(file : str)->bool:
+    if not os.path.exists(file):
+        return False
+
+    with h5py.File(file, 'r') as f:
+        for subset in f:
+            print(f'subet = {subset}')
+            for group in f[subset]:
+                print(f'group = {group}')
+    
+    return True
+
 if __name__ == '__main__':
-    main()
+    if not check_hdf5(file=hdf5_path):
+        main()
