@@ -74,6 +74,7 @@ try:
     train_captions, valid_captions, test_captions = merge_dicts(train_captions), merge_dicts(valid_captions), merge_dicts(test_captions)
 except ValueError as e:
     print(e)
+print(f'{len(train_pics)} items in train set, {len(valid_pics)} items in valid set, {len(test_pics)} items in test set')
 
 hdf5_dir = os.path.join('..', 'oxford_data')
 hdf5_path = os.path.join(hdf5_dir, 'oxford_hdf5')
