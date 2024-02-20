@@ -9,7 +9,7 @@ from PIL import Image
 from tqdm import tqdm
 from collections import Counter
 
-split_result_path = os.path.join('..', 'dataset', 'split')
+split_result_path = os.path.join('..', '..', 'dataset', 'split')
 dirs_path_list = [os.path.join(split_result_path, x) for x in os.listdir(split_result_path) if os.path.isdir(os.path.join(split_result_path, x))]
 
 level_count = []
@@ -76,8 +76,8 @@ except ValueError as e:
     print(e)
 print(f'{len(train_pics)} items in train set, {len(valid_pics)} items in valid set, {len(test_pics)} items in test set')
 
-hdf5_dir = os.path.join('..', 'oxford_data')
-hdf5_path = os.path.join(hdf5_dir, 'oxford_hdf5')
+hdf5_dir = os.path.join('..', '..', 'oxford_data')
+hdf5_path = os.path.join(hdf5_dir, 'oxford.hdf5')
 if not os.path.exists(hdf5_dir):
     os.makedirs(hdf5_dir)
 
