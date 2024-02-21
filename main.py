@@ -448,9 +448,6 @@ def sample(args: DictConfig) -> None:
 
 @hydra.main(config_path=".", config_name="config")
 def main(args: DictConfig) -> None:
-    
-    print(OmegaConf.to_yaml(args))
-    
     pl.seed_everything(args.seed)
     if args.num_cpu_cores > 0:
         torch.set_num_threads(args.num_cpu_cores)
@@ -463,5 +460,4 @@ def main(args: DictConfig) -> None:
         sample(args)
 
 if __name__ == '__main__':
-    print('Hello')
     main()
