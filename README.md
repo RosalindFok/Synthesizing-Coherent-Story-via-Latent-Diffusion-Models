@@ -13,5 +13,13 @@ pip install pillow
 pip install tqdm
 ```
 ### 1.2. 运行方法
+#### 生成hdf5文件
 `cd Synthesizing-Coherent-Story-via-Latent-Diffusion-Models` <br>
 `python data_script/oxford_hdf5.py`
+#### 运行主程序
+进入实验节点`ssh RockyOS8-Login0` <br>
+申请显卡`sbatch apply_GPU.sh` <br>
+查看显卡`squeue --me` <br>
+登录显卡`ssh r8a100-c01`, 其中`r8a100-c01`为`squeue --me`的回显结果中`NODELIST(REASON)`对应的值 <br>
+激活环境`conda activate arldm`  <br>
+`python main.py` <br>
