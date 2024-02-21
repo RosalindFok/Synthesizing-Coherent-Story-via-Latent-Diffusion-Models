@@ -38,7 +38,7 @@ class LightningDataset(pl.LightningDataModule):
         if self.args.dataset == "oxford":
             import datasets.oxford as data
         else:
-            raise ValueError("Unknown dataset: {}".format(self.args.dataset))
+            raise ValueError(f'Unknown dataset: {self.args.dataset}')
         if stage == "fit":
             self.train_data = data.StoryDataset("train", self.args)
             self.val_data = data.StoryDataset("val", self.args)
@@ -437,7 +437,7 @@ def sample(args: DictConfig) -> None:
         except:
             pass
     for i, image in enumerate(images):
-        image.save(os.path.join(args.sample_output_dir, '{:04d}.png'.format(i)))
+        image.save(os.path.join(args.sample_output_dir, f'{i:04d}.png'))
 
     if args.calculate_fid:
         ori = np.array([elem for sublist in predictions for elem in sublist[1]])

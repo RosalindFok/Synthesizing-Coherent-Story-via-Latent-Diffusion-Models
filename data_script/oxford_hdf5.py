@@ -89,7 +89,7 @@ def main():
             group = f.create_group(subset)
             images = []
             for i in range(len(pics[0])):
-                images.append(group.create_dataset('image{}'.format(i), (length,), dtype=h5py.vlen_dtype(np.dtype('uint8'))))
+                images.append(group.create_dataset(f'image{i}', (length,), dtype=h5py.vlen_dtype(np.dtype('uint8'))))
             text = group.create_dataset('text', (length,), dtype=h5py.string_dtype(encoding='utf-8'))
             for i, img_paths in enumerate(tqdm(pics, leave=True, desc="saveh5")):
                 imgs = [Image.open(os.path.join(img_path)).convert('RGB') for img_path in img_paths]
