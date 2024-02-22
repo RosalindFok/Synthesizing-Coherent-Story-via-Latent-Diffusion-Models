@@ -11,7 +11,7 @@ from transformers import CLIPTokenizer
 from models.blip_override.blip import init_tokenizer
 
 
-CLIPTokenizer_path = os.path.join('..','runwayml','stable-diffusion-v1-5')
+CLIPTokenizer_path = os.path.join('..','runwayml','stable-diffusion-v1-5', 'snapshots', '1d0c4ebf6ff58a5caecab40fa1406526bca4b5b9')
 
 class StoryDataset(Dataset):
     """

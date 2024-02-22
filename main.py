@@ -24,7 +24,7 @@ from models.blip_override.blip import blip_feature_extractor, init_tokenizer
 from models.diffusers_override.unet_2d_condition import UNet2DConditionModel
 from models.inception import InceptionV3
 
-CLIPTokenizer_path = os.path.join('..','runwayml','stable-diffusion-v1-5')
+CLIPTokenizer_path = os.path.join('..','runwayml','stable-diffusion-v1-5', 'snapshots', '1d0c4ebf6ff58a5caecab40fa1406526bca4b5b9')
 Pretrained_link = 'https://storage.googleapis.com/sfr-vision-language-research/BLIP/models/model_large.pth'
 
 class LightningDataset(pl.LightningDataModule):

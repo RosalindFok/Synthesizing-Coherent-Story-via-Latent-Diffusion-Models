@@ -39,6 +39,6 @@ oxford:
 hydra:
   run:
     dir: .
-  output_subdir: null
+  output_subdir: /lustre/S/yuxiaoyi/logs
 hydra/job_logging: enabled
 hydra/hydra_logging: enabled
