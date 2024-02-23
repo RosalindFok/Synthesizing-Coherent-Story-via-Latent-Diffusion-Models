@@ -84,7 +84,7 @@ if not os.path.exists(hdf5_dir):
 def main():
     start_time = time.time()
     with h5py.File(hdf5_path, 'w') as f:
-        for subset, pics, caps in zip(['train', 'valid', 'test'], [train_pics, valid_pics, test_pics], [train_captions, valid_captions, test_captions]):
+        for subset, pics, caps in zip(['train', 'val', 'test'], [train_pics, valid_pics, test_pics], [train_captions, valid_captions, test_captions]):
             length = len(pics)
             group = f.create_group(subset)
             images = []
