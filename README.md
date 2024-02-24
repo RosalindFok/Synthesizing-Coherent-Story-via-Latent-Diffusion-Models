@@ -14,8 +14,8 @@ pip install tqdm
 ```
 ### 1.2. 运行方法
 #### 生成hdf5文件
-`cd Synthesizing-Coherent-Story-via-Latent-Diffusion-Models` <br>
-`python data_script/oxford_hdf5.py`
+`cd Synthesizing-Coherent-Story-via-Latent-Diffusion-Models/data_script` <br>
+`python oxford_hdf5.py`
 #### 运行主程序
 进入实验节点`ssh RockyOS8-Login0` <br>
 申请显卡`sbatch apply_GPU.sh` <br>
