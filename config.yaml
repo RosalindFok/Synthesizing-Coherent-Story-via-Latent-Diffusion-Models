@@ -31,10 +31,10 @@ sample_output_dir: /lustre/S/yuxiaoyi/sample/save_samples # output directory
 
 oxford:
   hdf5_file: /lustre/S/yuxiaoyi/oxford_data/oxford.hdf5
-  max_length: 91  # 改
-  new_tokens: [ "fred", "barney", "wilma", "betty", "pebbles", "dino", "slate" ] # 改
-  clip_embedding_tokens: 49412 # 改
-  blip_embedding_tokens: 30525 # 改
+  max_length: 483  # 依据报错信息设置为484
+  new_tokens: null # 主要人物的名字
+  clip_embedding_tokens: null # 新增加了new_tokens后需要resize clip_embedding_tokens的长度
+  blip_embedding_tokens: null # 新增加了new_tokens后需要resize blip_embedding_tokens的长度
 
 hydra:
   run:

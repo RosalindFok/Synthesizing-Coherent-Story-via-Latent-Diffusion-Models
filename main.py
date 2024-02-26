@@ -115,7 +115,8 @@ class ARLDM(pl.LightningModule):
 
         self.text_encoder = CLIPTextModel.from_pretrained(CLIPTokenizer_path,
                                                           subfolder="text_encoder")
-        self.text_encoder.resize_token_embeddings(args.get(args.dataset).clip_embedding_tokens)
+        if not args.get(args.dataset).clip_embedding_tokens == None:
+            self.text_encoder.resize_token_embeddings(args.get(args.dataset).clip_embedding_tokens)
         # resize_position_embeddings
         old_embeddings = self.text_encoder.text_model.embeddings.position_embedding
         new_embeddings = self.text_encoder._get_resized_embeddings(old_embeddings, self.max_length)
@@ -129,7 +130,8 @@ class ARLDM(pl.LightningModule):
         self.mm_encoder = blip_feature_extractor(
             pretrained=Pretrained_link,
             image_size=224, vit='large')
-        self.mm_encoder.text_encoder.resize_token_embeddings(args.get(args.dataset).blip_embedding_tokens)
+        if not args.get(args.dataset).blip_embedding_tokens == None:
+            self.mm_encoder.text_encoder.resize_token_embeddings(args.get(args.dataset).blip_embedding_tokens)
 
         self.vae = AutoencoderKL.from_pretrained(CLIPTokenizer_path, subfolder="vae")
         self.unet = UNet2DConditionModel.from_pretrained(CLIPTokenizer_path, subfolder="unet")
