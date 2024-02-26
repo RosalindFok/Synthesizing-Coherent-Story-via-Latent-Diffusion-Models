@@ -35,10 +35,11 @@ class StoryDataset(Dataset):
         self.max_length = args.get(args.dataset).max_length
         self.clip_tokenizer = CLIPTokenizer.from_pretrained(CLIPTokenizer_path, subfolder="tokenizer")
         self.blip_tokenizer = init_tokenizer()
-        msg = self.clip_tokenizer.add_tokens(list(args.get(args.dataset).new_tokens))
-        print(f"clip {msg} new tokens added")
-        msg = self.blip_tokenizer.add_tokens(list(args.get(args.dataset).new_tokens))
-        print(f"blip {msg} new tokens added")
+        if not args.get(args.dataset).new_tokens == None:
+            msg = self.clip_tokenizer.add_tokens(list(args.get(args.dataset).new_tokens))
+            print(f"clip {msg} new tokens added")
+            msg = self.blip_tokenizer.add_tokens(list(args.get(args.dataset).new_tokens))
+            print(f"blip {msg} new tokens added")
 
         self.blip_image_processor = transforms.Compose([
             transforms.ToPILImage(),
