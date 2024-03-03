@@ -112,7 +112,12 @@ def check_hdf5(file : str)->bool:
             print(f'subet = {subset}')
             for group in f[subset]:
                 print(f'group = {group}')
-    
+
+        # 显示出test中的文本
+        print(f'Text in test group')
+        test_group = f['test']
+        for text in test_group.attrs['text']:
+            print(f'{text}')
     return True
 
 if __name__ == '__main__':
