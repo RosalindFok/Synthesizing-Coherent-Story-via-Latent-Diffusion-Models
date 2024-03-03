@@ -19,14 +19,14 @@ for dirs_path in dirs_path_list:
 element_count = Counter(level_count)
 # 9个级别的绘本，每个级别训练集:验证集:测试集=5:1:1
 for key, value in element_count.items():
-    element_count[key] = [value-value//7*2, value//7, value//7]
-
+    element_count[key] = [value-int(value/7)*2, int(value/7), int(value/7)]
 
 train_dirs, valid_dirs, test_dirs = [], [], []
 dirs_level = {key: [] for key in element_count.keys()}
 for dirs_path in dirs_path_list:
     level = int(dirs_path.split(os.sep)[-1][0])
     dirs_level[level].append(dirs_path)
+
 
 for key, value in dirs_level.items():
     train_dirs += value[ : element_count[key][0]]
@@ -56,24 +56,34 @@ def merge_dicts(dicts : list[dict])->dict:
 train_pics, valid_pics, test_pics = [], [], []
 train_captions, valid_captions, test_captions = [], [], []
 for pics, caps, dirs in zip([train_pics, valid_pics, test_pics], [train_captions, valid_captions, test_captions], [train_dirs, valid_dirs, test_dirs]):
-    tmps = []
+    png_list = []
     for dir in dirs:
-        tmps.append(sorted([os.path.join(dir, x) for x in os.listdir(dir) if x.endswith('.png')], key=extract_number))
+        # 加载png图片(注意一定要排序)
+        png_list.append(sorted([os.path.join(dir, x) for x in os.listdir(dir) if x.endswith('.png')], key=extract_number))
+        # 加载caption文本
         for x in os.listdir(dir):
             if x.endswith('.json'):
                 x = os.path.join(dir, x)
                 with open(x, 'r') as f:
                     data = json.load(f)
                     caps += [data]
-    for each_book in tmps:
+    print(f'{len(png_list)}')
+    for each_book in png_list:
         for i in range(len(each_book)-4):
             following4 = each_book[i+1:i+5]
             pics.append([each_book[i]]+following4)
+exit(0)
+    
+merge_test_dict = merge_dicts(test_captions)
+with open(os.path.join('..', '..', 'test_text.json'), 'w', encoding='utf-8') as f:
+     json.dump(merge_test_dict, f, indent=4, ensure_ascii=False)
 
 try:
     train_captions, valid_captions, test_captions = merge_dicts(train_captions), merge_dicts(valid_captions), merge_dicts(test_captions)
 except ValueError as e:
     print(e)
+
+# 每个items为语义连续的5张图片
 print(f'{len(train_pics)} items in train set, {len(valid_pics)} items in valid set, {len(test_pics)} items in test set')
 
 hdf5_dir = os.path.join('..', '..', 'oxford_data')
@@ -113,11 +123,6 @@ def check_hdf5(file : str)->bool:
             for group in f[subset]:
                 print(f'group = {group}')
 
-        # 显示出test中的文本
-        print(f'Text in test group')
-        test_group = f['test']
-        for text in test_group['text']:
-            print(f'{text}')
     return True
 
 if __name__ == '__main__':
