@@ -67,13 +67,17 @@ for pics, caps, dirs in zip([train_pics, valid_pics, test_pics], [train_captions
                 with open(x, 'r') as f:
                     data = json.load(f)
                     caps += [data]
-    print(f'{len(png_list)}')
+    
+    cnt = 0
     for each_book in png_list:
+        cnt = cnt + 1
+        print(f'{cnt}:\t{len(each_book)-4}')
+        
         for i in range(len(each_book)-4):
             following4 = each_book[i+1:i+5]
             pics.append([each_book[i]]+following4)
 exit(0)
-    
+
 merge_test_dict = merge_dicts(test_captions)
 with open(os.path.join('..', '..', 'test_text.json'), 'w', encoding='utf-8') as f:
      json.dump(merge_test_dict, f, indent=4, ensure_ascii=False)
