@@ -58,7 +58,7 @@ train_captions, valid_captions, test_captions = [], [], []
 for pics, caps, dirs in zip([train_pics, valid_pics, test_pics], [train_captions, valid_captions, test_captions], [train_dirs, valid_dirs, test_dirs]):
     png_list = []
     for dir in dirs:
-        # 加载png图片(注意一定要排序)
+        # 加载png图片(注意一定要排序) 双重列表: 内层列表为一本书下的所有图片
         png_list.append(sorted([os.path.join(dir, x) for x in os.listdir(dir) if x.endswith('.png')], key=extract_number))
         # 加载caption文本
         for x in os.listdir(dir):
@@ -68,15 +68,10 @@ for pics, caps, dirs in zip([train_pics, valid_pics, test_pics], [train_captions
                     data = json.load(f)
                     caps += [data]
     
-    cnt = 0
     for each_book in png_list:
-        cnt = cnt + 1
-        print(f'{cnt}:\t{len(each_book)-4}')
-        
         for i in range(len(each_book)-4):
             following4 = each_book[i+1:i+5]
             pics.append([each_book[i]]+following4)
-exit(0)
 
 merge_test_dict = merge_dicts(test_captions)
 with open(os.path.join('..', '..', 'test_text.json'), 'w', encoding='utf-8') as f:
