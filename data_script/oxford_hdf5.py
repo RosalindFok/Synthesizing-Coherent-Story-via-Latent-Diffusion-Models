@@ -116,7 +116,7 @@ def check_hdf5(file : str)->bool:
         # 显示出test中的文本
         print(f'Text in test group')
         test_group = f['test']
-        for text in test_group.attrs['text']:
+        for text in test_group['text']:
             print(f'{text}')
     return True
 
