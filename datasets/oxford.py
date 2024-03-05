@@ -60,8 +60,11 @@ class StoryDataset(Dataset):
         for i in range(5):
             im = self.h5[f'image{i}'][index]
             im = cv2.imdecode(im, cv2.IMREAD_COLOR)
-            idx = random.randint(0, 4)
-            images.append(im[idx * 128: (idx + 1) * 128])
+            # Pororo数据集
+            # idx = random.randint(0, 4)
+            # images.append(im[idx * 128: (idx + 1) * 128])
+            # Oxford数据集
+            images.append(im)
 
         source_images = torch.stack([self.blip_image_processor(im) for im in images])
         images = images[1:] if self.args.task == 'continuation' else images
