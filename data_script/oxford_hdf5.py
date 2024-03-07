@@ -17,9 +17,9 @@ for dirs_path in dirs_path_list:
     level_count.append(int(dirs_path.split(os.sep)[-1][0]))
 # 使用Counter统计每个元素出现的次数
 element_count = Counter(level_count)
-# 9个级别的绘本，每个级别训练集:验证集:测试集=5:1:1
+#  9个级别的绘本，1个为test，剩下的。。。。。。。。。。。。。。。9个级别的绘本，每个级别训练集:验证集:测试集=5:1:1
 for key, value in element_count.items():
-    element_count[key] = [value-int(value/7)*2, int(value/7), int(value/7)]
+    element_count[key] = [value-value//7-1, value//7, 1]
 
 train_dirs, valid_dirs, test_dirs = [], [], []
 dirs_level = {key: [] for key in element_count.keys()}
