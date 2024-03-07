@@ -7,31 +7,19 @@ import time
 import numpy as np
 from PIL import Image
 from tqdm import tqdm
-from collections import Counter
 
 split_result_path = os.path.join('..', '..', 'dataset', 'split')
 dirs_path_list = [os.path.join(split_result_path, x) for x in os.listdir(split_result_path) if os.path.isdir(os.path.join(split_result_path, x))]
 
-level_count = []
-for dirs_path in dirs_path_list:
-    level_count.append(int(dirs_path.split(os.sep)[-1][0]))
-# 使用Counter统计每个元素出现的次数
-element_count = Counter(level_count)
-#  9个级别的绘本，1个为test，剩下的。。。。。。。。。。。。。。。9个级别的绘本，每个级别训练集:验证集:测试集=5:1:1
-for key, value in element_count.items():
-    element_count[key] = [value-value//7-1, value//7, 1]
-
-train_dirs, valid_dirs, test_dirs = [], [], []
-dirs_level = {key: [] for key in element_count.keys()}
-for dirs_path in dirs_path_list:
-    level = int(dirs_path.split(os.sep)[-1][0])
-    dirs_level[level].append(dirs_path)
-
-
-for key, value in dirs_level.items():
-    train_dirs += value[ : element_count[key][0]]
-    valid_dirs += value[element_count[key][0] : element_count[key][0]+element_count[key][1]]
-    test_dirs += value[element_count[key][0]+element_count[key][1] : ]
+# 9-11做test
+test_dirs = [x for x in dirs_path_list if '9-11' in x]
+assert len(test_dirs) == 1
+# 8-11, 8-08, 7-11, 7-17, 6-13, 6-20, 5-11, 5-20, 4-11, 4-24, 3-11, 3-29, 2-11, 2-25, 1-38, 1-59做valid
+valid_dirs = [x for x in dirs_path_list if any(y in x for y in ['8-11', '8-08', '7-11', '7-17', '6-13', '6-20', '5-11', '5-20', '4-11', '4-24', '3-11', '3-29', '2-11', '2-25', '1-38', '1-59'])]
+assert len(valid_dirs) == 16
+# 其他做train
+train_dirs = [x for x in dirs_path_list if not x in test_dirs and not x in valid_dirs]
+assert len(train_dirs) == len(dirs_path_list)-len(test_dirs)-len(valid_dirs)
 
 def extract_number(s)->int:
     return int(re.search(r'_([0-9]+).png', s).group(1))
