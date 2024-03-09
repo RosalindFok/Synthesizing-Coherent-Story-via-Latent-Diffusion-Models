@@ -121,16 +121,6 @@ class ARLDM(pl.LightningModule):
         old_embeddings = self.text_encoder.text_model.embeddings.position_embedding
         new_embeddings = self.text_encoder._get_resized_embeddings(old_embeddings, self.max_length)
 
-        print(type(old_embeddings))
-        print(old_embeddings.num_embeddings)
-        print(old_embeddings.embedding_dim)
-        print(old_embeddings.weight.shape)
-        print(type(new_embeddings))
-        print(new_embeddings.num_embeddings)
-        print(new_embeddings.embedding_dim)
-        print(new_embeddings.weight.shape)
-        exit(0)
-
         self.text_encoder.text_model.embeddings.position_embedding = new_embeddings
         self.text_encoder.config.max_position_embeddings = self.max_length
         self.text_encoder.max_position_embeddings = self.max_length
