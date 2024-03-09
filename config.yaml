@@ -32,10 +32,9 @@ sample_output_dir: /lustre/S/yuxiaoyi/sample/save_samples # output directory
 oxford:
   hdf5_file: /lustre/S/yuxiaoyi/oxford_data/oxford.hdf5
   max_length: 483  # 依据报错信息设置为484
-  new_tokens: null # 主要人物的名字
-  clip_embedding_tokens: null # 新增加了new_tokens后需要resize clip_embedding_tokens的长度
-  blip_embedding_tokens: null # 新增加了new_tokens后需要resize blip_embedding_tokens的长度
-
+  new_tokens: ["biff", "chip", "kipper", "floppy", "nadim", "anneena", "wilf"] # 主要人物的名字
+  clip_embedding_tokens: 49414 # vocab.json中49408个单词。如果new tokens中有n个单词不存在 或者 仅有带\w的形式，则clip_embedding_tokens+n
+  blip_embedding_tokens: 30529 # 30522+n+2
 hydra:
   run:
     dir: .
