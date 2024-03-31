@@ -18,6 +18,8 @@ for dir in tqdm(dirs_path_list, desc='Moving', leave=True):
     dir = os.path.join(newcaps_path, dir.split(os.sep)[-1])
     create_dir(dir)
     caption = {}
+    if len(image_path)==0:
+        continue
     for image in image_path:
         image_name = image.split(os.sep)[-1]
         shutil.copy(src=image, dst=os.path.join(dir, image_name))
