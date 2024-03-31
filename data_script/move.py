@@ -23,8 +23,9 @@ for dir in tqdm(dirs_path_list, desc='Moving', leave=True):
         shutil.copy(src=image, dst=os.path.join(dir, image_name))
         # Do not change caption in test
         if 'test' in dir:
-            continue
-        caption[image_name] = data[image_name]
+            caption[image_name] = caption[image_name]
+        else:
+            caption[image_name] = data[image_name]
     
     with open(os.path.join(dir, 'caption.json'), 'w') as f:
         json.dump(caption, f, indent=4)
