@@ -8,17 +8,17 @@ import numpy as np
 from PIL import Image
 from tqdm import tqdm
 
-split_result_path = os.path.join('..', '..', 'dataset', 'split')
+split_result_path = os.path.join('..', '..', 'dataset', 'newcaps')
 dirs_path_list = [os.path.join(split_result_path, x) for x in os.listdir(split_result_path) if os.path.isdir(os.path.join(split_result_path, x))]
 
-# 9-11构建一个新的test文件夹做test
+# 自己构建一个新的test文件夹做test
 test_dirs = [x for x in dirs_path_list if 'test' in x]
 assert len(test_dirs) == 1
 # 8-11, 8-08, 7-11, 7-17, 6-13, 6-20, 5-11, 5-20, 4-11, 4-24, 3-11, 3-29, 2-11, 2-25, 1-38, 1-59做valid
 valid_dirs = [x for x in dirs_path_list if any(y in x for y in ['8-11', '8-08', '7-11', '7-17', '6-13', '6-20', '5-11', '5-20', '4-11', '4-24', '3-11', '3-29', '2-11', '2-25', '1-38', '1-59'])]
 assert len(valid_dirs) == 16
 # 其他做train
-train_dirs = [x for x in dirs_path_list if not x in test_dirs and not x in valid_dirs and not '9-11' in x]
+train_dirs = [x for x in dirs_path_list if not x in test_dirs and not x in valid_dirs]
 assert len(train_dirs) == len(dirs_path_list)-1-len(test_dirs)-len(valid_dirs)
 
 def extract_number(s)->int:
