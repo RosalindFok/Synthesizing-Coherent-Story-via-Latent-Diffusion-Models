@@ -19,7 +19,7 @@ valid_dirs = [x for x in dirs_path_list if any(y in x for y in ['8-11', '8-08', 
 assert len(valid_dirs) == 16
 # 其他做train
 train_dirs = [x for x in dirs_path_list if not x in test_dirs and not x in valid_dirs]
-assert len(train_dirs) == len(dirs_path_list)-1-len(test_dirs)-len(valid_dirs)
+assert len(train_dirs) == len(dirs_path_list)-len(test_dirs)-len(valid_dirs)
 
 def extract_number(s)->int:
     return int(re.search(r'_([0-9]+).png', s).group(1))
