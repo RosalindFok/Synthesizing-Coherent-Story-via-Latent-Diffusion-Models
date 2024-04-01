@@ -8,7 +8,9 @@ import numpy as np
 from PIL import Image
 from tqdm import tqdm
 
-split_result_path = os.path.join('..', '..', 'dataset', 'newcaps')
+using_old_split = True
+
+split_result_path = os.path.join('..', '..', 'dataset', 'split') if using_old_split else os.path.join('..', '..', 'dataset', 'newcaps')
 dirs_path_list = [os.path.join(split_result_path, x) for x in os.listdir(split_result_path) if os.path.isdir(os.path.join(split_result_path, x))]
 
 # 自己构建一个新的test文件夹做test
@@ -74,7 +76,7 @@ except ValueError as e:
 print(f'{len(train_pics)} items in train set, {len(valid_pics)} items in valid set, {len(test_pics)} items in test set')
 
 hdf5_dir = os.path.join('..', '..', 'oxford_data')
-hdf5_path = os.path.join(hdf5_dir, 'oxford.hdf5')
+hdf5_path = os.path.join(hdf5_dir, 'old_oxford.hdf5') if using_old_split else os.path.join(hdf5_dir, 'oxford.hdf5')
 if not os.path.exists(hdf5_dir):
     os.makedirs(hdf5_dir)
 
