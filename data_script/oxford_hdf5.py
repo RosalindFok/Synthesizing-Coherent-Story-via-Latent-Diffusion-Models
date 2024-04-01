@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image
 from tqdm import tqdm
 
-using_old_split = True
+using_old_split = False
 
 split_result_path = os.path.join('..', '..', 'dataset', 'split') if using_old_split else os.path.join('..', '..', 'dataset', 'newcaps')
 dirs_path_list = [os.path.join(split_result_path, x) for x in os.listdir(split_result_path) if os.path.isdir(os.path.join(split_result_path, x))]
