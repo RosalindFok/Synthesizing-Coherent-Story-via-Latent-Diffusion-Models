@@ -8,6 +8,14 @@ create_dir = lambda x : os.makedirs(x) if not os.path.exists(x) else None
 split_result_path = os.path.join('..', '..', 'dataset', 'split')
 dirs_path_list = [os.path.join(split_result_path, x) for x in os.listdir(split_result_path) if os.path.isdir(os.path.join(split_result_path, x))]
 
+
+# TODO 测试部分train
+valid_dirs = ['8-11', '8-08', '7-11', '7-17', '6-13', '6-20', '5-11', '5-20', '4-11', '4-24', '3-11', '3-29', '2-11', '2-25', '1-38', '1-59']
+dirs_path_list = [x for x in dirs_path_list if x in valid_dirs or any(y in x for y in ['1-', '2-', '3-'])]
+# for dirs in dirs_path_list:
+    # print(dirs)
+# TODO
+
 with open('caption.json', 'r') as f:
     data = json.load(f)
 
