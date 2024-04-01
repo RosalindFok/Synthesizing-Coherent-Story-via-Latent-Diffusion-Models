@@ -25,7 +25,7 @@ for dir in tqdm(dirs_path_list, desc='Moving', leave=True):
         if '.json' in image:
             continue
         else:
-            caption[image_name] = data[image_name].replace('-', '').replace('/', '').encode('utf-8').decode('unicode_escape')
+            caption[image_name] = data[image_name].replace('-', '').replace('/', '').replace('`', '').encode('utf-8').decode('unicode_escape')
     
     with open(os.path.join(dir, 'caption.json'), 'w') as f:
         json.dump(caption, f, indent=4)
