@@ -175,6 +175,11 @@ class BertSelfAttention(nn.Module):
         past_key_value = (key_layer, value_layer)
 
         # Take the dot product between "query" and "key" to get the raw attention scores.
+        if not query_layer.shape == key_layer.shape:
+            print(query_layer.shape)
+            print(key_layer.shape)
+            print('is_cross_attention: ', is_cross_attention)
+            exit(0)
         attention_scores = torch.matmul(query_layer, key_layer.transpose(-1, -2))
 
         if self.position_embedding_type == "relative_key" or self.position_embedding_type == "relative_key_query":
