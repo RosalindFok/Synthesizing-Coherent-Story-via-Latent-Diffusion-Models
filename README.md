@@ -1,9 +1,8 @@
 # 基于扩散模型的连续故事生成
-进入服务器、登陆显卡：
-ssh RockyOS8-Login0
-申请显卡：sbatch demo.sh （注意：需要80GB A100显卡）
-查看显卡：squeue --me
-登录显卡：ssh r8a100-c01（其中`r8a100-c01`为`squeue --me`的回显结果中`NODELIST(REASON)`对应的值）
+进入服务器、登陆显卡：`ssh RockyOS8-Login0`<br>
+申请显卡：`sbatch demo.sh` （注意：需要80GB A100显卡）<br>
+查看显卡：`squeue --me`<br>
+登录显卡：`ssh r8a100-c01`（其中`r8a100-c01`为`squeue --me`的回显结果中`NODELIST(REASON)`对应的值）
 
 ## 第一环节：LLAMA2-7B模型（文本-文本）
 运行方法：
