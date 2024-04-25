@@ -1,5 +1,4 @@
-# Synthesizing-Coherent-Story-via-Latent-Diffusion-Models
-基于扩散模型的连续故事生成
+# 基于扩散模型的连续故事生成
 
 ## 1. raw data转为hdf5格式
 ### 1.1. 数据环境配置
@@ -16,7 +15,18 @@ pip install tqdm
 #### 生成hdf5文件
 `cd Synthesizing-Coherent-Story-via-Latent-Diffusion-Models/data_script` <br>
 `python oxford_hdf5.py`
+#### 运行Llama2-7b
+LLAMA2环境中，"/lustre/S/yuxiaoyi/llama_bot/"路径下，执行指令：
+```shell
+CUDA_VISIBLE_DEVICES=0 python src/cli.py \
+    --model_name_or_path /lustre/S/yuxiaoyi/LLAMA2-7b \
+    --template llama2 \
+    --temperature 0.95 \
+    --top_p 0.7 \
+    --top_k  50
+```
 #### 运行主程序
+在`config.yaml`中修改相关参数
 进入实验节点`ssh RockyOS8-Login0` <br>
 申请显卡`sbatch apply_GPU.sh` <br>
 查看显卡`squeue --me` <br>
