@@ -36,10 +36,10 @@ pip install tqdm
 `python oxford_hdf5.py`
 
 ## 2. 运行主程序
-进入环境：`conda activate arldm`
-进入路径：cd /lustre/S/yuxiaoyi/Synthesizing-Coherent-Story-via-Latent-Diffusion-Models/
-执行指令：python main.py
+进入环境：`conda activate arldm`<br>
+进入路径：`cd /lustre/S/yuxiaoyi/Synthesizing-Coherent-Story-via-Latent-Diffusion-Models/`<br>
+执行指令：`python main.py`<br>
 注意：
-在`/lustre/S/yuxiaoyi/Synthesizing-Coherent-Story-via-Latent-Diffusion-Models/config.yaml`中按需修改相关参数
-训练的结果在：/lustre/S/yuxiaoyi/device/save_ckpt/
-生成的结果在：/lustre/S/yuxiaoyi/sample/
+在`/lustre/S/yuxiaoyi/Synthesizing-Coherent-Story-via-Latent-Diffusion-Models/config.yaml`中按需修改相关参数<br>
+训练的结果在：`/lustre/S/yuxiaoyi/device/save_ckpt/`<br>
+生成的结果在：`/lustre/S/yuxiaoyi/sample/`<br>
